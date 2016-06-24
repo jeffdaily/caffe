@@ -244,7 +244,7 @@ class PythonCallback: public Solver<Dtype>::Callback {
   }
 };
 template<typename Dtype>
-void Solver_addCallback(Solver<Dtype> * solver, bp::object on_start,
+void Solver_add_callback(Solver<Dtype> * solver, bp::object on_start,
   bp::object on_gradients_ready) {
   solver->add_callback(new PythonCallback<Dtype>(on_start, on_gradients_ready));
 }
@@ -338,7 +338,7 @@ BOOST_PYTHON_MODULE(_caffe) {
     .add_property("test_nets", bp::make_function(&Solver<Dtype>::test_nets,
           bp::return_internal_reference<>()))
     .add_property("iter", &Solver<Dtype>::iter)
-    .def("add_callback", &Solver_addCallback<Dtype>)
+    .def("add_callback", &Solver_add_callback<Dtype>)
     .def("solve", static_cast<void (Solver<Dtype>::*)(const char*)>(
           &Solver<Dtype>::Solve), SolveOverloads())
     .def("step", &Solver<Dtype>::Step)
